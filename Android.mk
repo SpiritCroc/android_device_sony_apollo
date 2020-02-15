@@ -25,4 +25,14 @@ LOCAL_PATH := $(call my-dir)
 ifeq ($(TARGET_DEVICE),apollo)
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
+include $(CLEAR_VARS)
+
+BDWLAN_SYMLINK := $(TARGET_OUT_VENDOR)/firmware/wlan/qca_cld/bdwlan.bin
+$(BDWLAN_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "bdwlan link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /vendor/etc/wifi/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(BDWLAN_SYMLINK)
 endif
