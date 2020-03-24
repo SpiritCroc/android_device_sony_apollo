@@ -14,9 +14,6 @@
 
 include device/sony/tama-common/BoardConfigCommon.mk
 
-# TODO split for apollo_dual
-TARGET_BOOTLOADER_BOARD_NAME := H8314,H8324
-
 # Partition information
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000
@@ -25,3 +22,6 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4227858432
 BOARD_VENDORIMAGE_PARTITION_SIZE := 1056714752
 # Reserve space for data encryption (51448823808-16384)
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 51448807424
+
+# inherit from the proprietary version
+-include vendor/sony/apollo/BoardConfigVendor.mk
