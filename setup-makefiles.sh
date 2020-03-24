@@ -1,5 +1,6 @@
+#!/bin/bash
 #
-# Copyright (C) 2018 The LineageOS Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,15 +15,12 @@
 # limitations under the License.
 #
 
-# WARNING: Everything listed here will be built on ALL platforms,
-# including x86, the emulator, and the SDK.  Modules must be uniquely
-# named (liblights.tuna), and must build everywhere, or limit themselves
-# to only building on ARM if they include assembly. Individual makefiles
-# are responsible for having their own logic, for fine-grained control.
+set -e
 
-LOCAL_PATH := $(call my-dir)
+export DEVICE=apollo
+export DEVICE_COMMON=tama-common
+export VENDOR=sony
 
-ifeq ($(TARGET_DEVICE),apollo)
-include $(call all-makefiles-under,$(LOCAL_PATH))
+export DEVICE_BRINGUP_YEAR=2020
 
-endif
+./../../$VENDOR/$DEVICE_COMMON/setup-makefiles.sh $@

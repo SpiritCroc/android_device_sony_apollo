@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Inherit the tama-common definitions
-$(call inherit-product, device/sony/tama-common/tama.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_o.mk)
+
+# call the proprietary setup
+$(call inherit-product, vendor/sony/apollo/apollo-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/sony/apollo/overlay
 
@@ -35,5 +37,15 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.sf.lcd_density=480 \
     ro.usb.pid_suffix=1F9
 
-# setup dm-verity configs.
-PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc/1da4000.ufshc/by-name/vendor
+# Device init scripts
+PRODUCT_PACKAGES += \
+    init.target.rc
+
+# NFC
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
+    $(LOCAL_PATH)/nfc/libnfc-nxp_RF.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp_RF.conf \
+    $(LOCAL_PATH)/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
+
+# Inherit the tama-common definitions
+$(call inherit-product, device/sony/tama-common/tama.mk)
