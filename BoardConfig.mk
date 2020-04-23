@@ -28,3 +28,6 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 51448807424
 
 # inherit from the proprietary version
 -include vendor/sony/apollo/BoardConfigVendor.mk
+
+# Prebuilt TWRP
+-include device/twrp/apollo/twrp.mk
